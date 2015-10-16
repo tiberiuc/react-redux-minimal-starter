@@ -1,19 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {load} from '../actions/AppActions'
+import SmartComponent from '../components/SmartComponent'
+import DumbComponent from '../components/DumbComponent'
 
 class Home extends React.Component {
 
 
   componentWillMount() {
     const {dispatch} = this.props
-    dispatch(load())
   }
   render() {
     const {state, dispatch} = this.props
     return (
-      <h1>Home page</h1>
+      <div>
+        <SmartComponent />
+        <DumbComponent />
+      </div>
     )
   }
 
