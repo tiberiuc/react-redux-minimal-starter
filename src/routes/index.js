@@ -1,14 +1,16 @@
-import React from 'react'
-import {Router, Route, Link} from 'react-router'
+var React  = require('react');
+var Router = require('react-router');
+var Route  = Router.Route;
+var Link   = Router.Link;
 
-import Home from '../pages/Home'
-import NoMatch from '../pages/NoMatch'
+var Home    = reuqire('..pages/Home');
+var NoMatch = require('../pages/NoMatch');
 
-const routes = (
+var routes = (
   <Route>
     <Route path="/" component={Home} />
     <Route path="*" component={NoMatch} />
   </Route>
-)
+);
 
-export default routes
+module.exports = routes;
