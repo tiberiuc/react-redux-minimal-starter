@@ -1,27 +1,41 @@
+var constants = require('../constants/ActionTypes')
+var ADD_ITEM = constants.ADD_ITEM
+var DELETE_ITEM = constants.DELETE_ITEM
+var SET_ITEM = constants.SET_ITEM
 
-import {ADD_ITEM, SET_ITEM, DELETE_ITEM} from '../constants/ActionTypes'
+var initialState = [];
 
-const initialState = []
+var reducer = function (state, action) {
+  if(!state) {
+    state = initialState;
+  }
+  var id = action.id;
+  var data = action.data;
 
-export default (state=initialState, action) => {
-  const {id, data} = action
   switch(action.type){
 
     case ADD_ITEM:
-      return [...state, {id, data}]
+      var newData = []
+      state.forEach(function(item){
+        newData.push(item)
+      })
+      newData.push({id:id, data:data})
+      return newData
 
     case SET_ITEM:
-      return state.map(item =>
-        item.id === id ?
-          Object.assign({}, item, {data}) :
+      return state.map(function(item) {
+        return item.id === id ?
+          Object.assign({}, item, {data:data}) :
           item
-        )
+        })
 
     case DELETE_ITEM:
-      return state.filter( item => item.id !== id)
+      return state.filter( function(item) { return item.id !== id})
 
     default:
       return state
   }
 }
+
+module.exports = reducer;
 

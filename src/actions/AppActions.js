@@ -1,12 +1,15 @@
 
-import { ADD_ITEM, DELETE_ITEM, SET_ITEM} from '../constants/ActionTypes'
-import axios from 'axios'
+var axios = require('axios')
+var constants = require('../constants/ActionTypes')
+var ADD_ITEM = constants.ADD_ITEM
+var DELETE_ITEM = constants.DELETE_ITEM
+var SET_ITEM = constants.SET_ITEM
 
 
-export const load = () => {
-  return dispatch => {
-    axios.get(URL).then( response => {
-      response.data.map( item => {
+var load = function () {
+  return function(dispatch) {
+    axios.get(URL).then( function(response) {
+      response.data.map( function(item) {
         dispatch(itemSet(item.id, item.data))
       })
     })
@@ -14,21 +17,31 @@ export const load = () => {
 
 }
 
-export const itemAdded = (id, data) => ({
-  type: ADD_ITEM,
-  id, data
-})
+var itemAdded = function(id, data) {
+  return {
+    type: ADD_ITEM,
+    id: id,
+    data: data
+  }
+}
 
-export const itemDeleted = (id) => ({
-  type: DELETE_ITEM,
-  id
-})
+var itemDeleted = function(id) {
+  return {
+    type: DELETE_ITEM,
+    id: id
+  }
+}
+var itemSet = function(id, data) {
+  return {
+    type: SET_ITEM,
+    id: id,
+    data: data
+  }
+}
 
-export const itemSet = (id, data) => ({
-  type: SET_ITEM,
-  id, data
-})
-
-
-
-
+module.exports = {
+  load: load,
+  itemAded: itemAdded,
+  itemDeleted: itemDeleted,
+  itemSet: itemSet
+}
