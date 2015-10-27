@@ -1,8 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Router, Route, Link} from 'react-router'
-import { Provider } from 'react-redux';
-import invariant    from 'invariant';
+import { Provider } from 'react-redux'
+import invariant    from 'invariant'
+import {ReduxRouter} from 'redux-router'
 
 import {load} from '../actions/AppActions'
 
@@ -18,20 +19,11 @@ class App extends React.Component {
 
 
   renderRouter () {
-    invariant(
-      this.props.routingContext || this.props.routerHistory,
-      '<Root /> needs either a routingContext or routerHistory to render.'
+    return (
+      <ReduxRouter>
+        {routes}
+      </ReduxRouter>
     );
-
-    if (this.props.routingContext) {
-      return <RoutingContext {...this.props.routingContext} />;
-    } else {
-      return (
-        <Router history={this.props.routerHistory}>
-          {routes}
-        </Router>
-      );
-    }
   }
 
   render () {
@@ -47,17 +39,4 @@ class App extends React.Component {
 
 }
 
-function mapStateToProps(state){
-  return {
-    state
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

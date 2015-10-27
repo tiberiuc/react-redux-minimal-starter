@@ -12,6 +12,6 @@ const store = configureStore()
 
 const targetEl = document.getElementById('root')
 
-const node = <App routerHistory={createBrowserHistory()} store={store}/>
+const node = <App  store={store}/>
 ReactDOM.render(node, targetEl)
 
