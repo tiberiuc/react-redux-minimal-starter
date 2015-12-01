@@ -6,15 +6,12 @@ import {pushState } from 'redux-router'
 class SmartComponent extends React.Component {
 
 
-  componentWillMount() {
-    const {dispatch} = this.props
-  }
   render() {
-    const {pushState} = this.props;
+    const {dispatch, pushState} = this.props;
 
     const handleRedirect = () => {
       console.log(this.props.location)
-      pushState(null, '/redirected')
+      dispatch(pushState(null, '/redirected'))
     }
 
     const {simpleStore, immutableStore, dispatch} = this.props
